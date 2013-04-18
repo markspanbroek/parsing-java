@@ -2,6 +2,7 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 import static net.spanbroek.parsing.Parsing.*;
+import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -11,7 +12,7 @@ public class LiteralTests {
 
     @Test
     public void shouldSuccessfullyParseALiteral() {
-        assertEquals("foo", parser.parse("foo"));
+        assertEquals(result("foo"), parser.parse("foo"));
     }
 
     @Test

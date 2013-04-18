@@ -1,6 +1,8 @@
 package net.spanbroek.parsing;
 
-class LiteralParser implements Parser {
+import static net.spanbroek.parsing.util.Results.result;
+
+class LiteralParser extends Parser {
 
     private final String literal;
 
@@ -9,10 +11,9 @@ class LiteralParser implements Parser {
     }
 
     @Override
-    public String parse(String input) {
+    protected void parse(String input, ResultHandler handler) {
         if (input.startsWith(literal)) {
-            return literal;
+            handler.handle(result(literal), input.substring(literal.length()));
         }
-        return null;
     }
 }

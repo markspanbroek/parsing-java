@@ -1,7 +1,22 @@
 package net.spanbroek.parsing;
 
-public interface Parser {
+public abstract class Parser {
 
-    String parse(String input);
+    public Result parse(String input) {
+        Handler handler = new Handler();
+        parse(input, handler);
+        return handler.lastResult;
+    }
 
+    protected abstract void parse(String input, ResultHandler handler);
+
+    private class Handler implements ResultHandler {
+
+        public Result lastResult;
+
+        @Override
+        public void handle(Result result, String remainder) {
+            lastResult = result;
+        }
+    }
 }
