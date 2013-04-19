@@ -21,4 +21,7 @@ public class Parsing {
         }
         return result;
     }
+
+    public static Parser empty = new EmptyParser();
+    }
 }
