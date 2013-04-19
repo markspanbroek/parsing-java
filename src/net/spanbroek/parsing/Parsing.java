@@ -13,4 +13,12 @@ public class Parsing {
         }
         return result;
     }
+
+    public static Parser choice(Parser parser1, Parser parser2, Parser... rest) {
+        Parser result = new AlternativesParser(parser1, parser2);
+        for (Parser parser : rest) {
+            result = new AlternativesParser(result, parser);
+        }
+        return result;
+    }
 }
