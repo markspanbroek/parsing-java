@@ -31,4 +31,10 @@ public class Parsing {
     public static Rule rule(Parser expression) {
         return new Rule(expression);
     }
+
+    public static Parser repeat(Parser parser) {
+        Rule repetition = rule();
+        repetition.is(choice(empty, concat(repetition, parser)));
+        return repetition;
+    }
 }
