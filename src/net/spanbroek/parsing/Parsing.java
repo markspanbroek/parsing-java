@@ -23,5 +23,12 @@ public class Parsing {
     }
 
     public static Parser empty = new EmptyParser();
+
+    public static Rule rule() {
+        return rule(empty);
+    }
+
+    public static Rule rule(Parser expression) {
+        return new Rule(expression);
     }
 }

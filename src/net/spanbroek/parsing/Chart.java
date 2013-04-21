@@ -2,6 +2,8 @@ package net.spanbroek.parsing;
 
 import net.spanbroek.parsing.util.MultiMap;
 
+import java.util.List;
+
 public class Chart {
 
     private ResultHandlers waiting = new ResultHandlers();
@@ -9,7 +11,9 @@ public class Chart {
 
     public void waitForResults(String input, ResultHandler handler) {
         waiting.add(input, handler);
-        for (PartialResult partial : results.get(input)) {
+        List<PartialResult> partials = results.get(input);
+        for (int i=0; i<partials.size(); i++) {
+            PartialResult partial = partials.get(i);
             handler.handle(partial.result, partial.remainder);
         }
     }
