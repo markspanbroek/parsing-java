@@ -20,6 +20,6 @@ public class EmptyTests {
     @Test
     public void shouldNotAddToResult() {
         parser = concat(empty, literal("a"));
-        assertEquals(result("a"), parser.parse("a"));
+        assertEquals("a", parser.parse("a"));
     }
 }

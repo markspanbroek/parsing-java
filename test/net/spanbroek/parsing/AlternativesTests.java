@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static net.spanbroek.parsing.Parsing.choice;
 import static net.spanbroek.parsing.Parsing.literal;
-import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -14,9 +13,9 @@ public class AlternativesTests {
 
     @Test
     public void shouldParseAlternatives() {
-        assertEquals(result("foo"), parser.parse("foo"));
-        assertEquals(result("bar"), parser.parse("bar"));
-        assertEquals(result("baz"), parser.parse("baz"));
+        assertEquals("foo", parser.parse("foo"));
+        assertEquals("bar", parser.parse("bar"));
+        assertEquals("baz", parser.parse("baz"));
     }
 
     @Test

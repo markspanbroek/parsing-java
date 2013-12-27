@@ -37,7 +37,7 @@ public class RuleTests {
         Rule parser = rule();
         parser.is( choice(parser, literal("a")) );
 
-        assertEquals(result("a"), parser.parse("a"));
+        assertEquals("a", parser.parse("a"));
     }
 
     @Test
