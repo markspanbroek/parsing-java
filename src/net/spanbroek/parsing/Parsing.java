@@ -41,4 +41,8 @@ public class Parsing {
     public static Parser transform(Parser parser, Transformation transformation) {
         return new TransformingParser(parser, transformation);
     }
+
+    public static Parser range(char begin, char end) {
+        return new Range(begin, end);
+    }
 }
