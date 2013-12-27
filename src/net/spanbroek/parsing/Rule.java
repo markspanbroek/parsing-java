@@ -17,6 +17,10 @@ public class Rule extends Parser {
         this.expression = expression;
     }
 
+    public void transform(Transformation transformation) {
+        expression = Parsing.transform(expression, transformation);
+    }
+
     @Override
     protected void parse(final String input, ResultHandler handler) {
         chart.waitForResults(input, handler);

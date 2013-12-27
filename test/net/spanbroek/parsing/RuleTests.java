@@ -2,6 +2,8 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static net.spanbroek.parsing.Parsing.*;
 import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
@@ -36,5 +38,18 @@ public class RuleTests {
         parser.is( choice(parser, literal("a")) );
 
         assertEquals(result("a"), parser.parse("a"));
+    }
+
+    @Test
+    public void shouldEnableTransformations() {
+        Rule parser = rule();
+        parser.transform(new Transformation() {
+            @Override
+            public Object transform(List<Object> result) {
+                return "foo";
+            }
+        });
+
+        assertEquals("foo", parser.parse(""));
     }
 }

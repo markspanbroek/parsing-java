@@ -6,28 +6,28 @@ import java.util.*;
 
 public class Results {
 
-    public static Result result(String... result) {
+    public static Result result(Object... result) {
         return new ArrayResult(result);
     }
 
     public static Result combine(Result... results) {
-        ArrayList<String> combination = new ArrayList<String>();
+        ArrayList<Object> combination = new ArrayList<Object>();
         for(Result result : results) {
             combination.addAll(result);
         }
         return new ListResult(combination);
     }
 
-    private static class ArrayResult extends AbstractList<String> implements Result {
+    private static class ArrayResult extends AbstractList<Object> implements Result {
 
-        private String[] result;
+        private Object[] result;
 
-        private ArrayResult(String... result) {
+        private ArrayResult(Object... result) {
             this.result = result;
         }
 
         @Override
-        public String get(int i) {
+        public Object get(int i) {
             return result[i];
         }
 
@@ -37,17 +37,17 @@ public class Results {
         }
     }
 
-    private static class ListResult extends AbstractList<String> implements Result {
+    private static class ListResult extends AbstractList<Object> implements Result {
 
-        private List<String> result;
+        private List result;
 
-        private ListResult(List<String> result) {
+        private ListResult(List result) {
             this.result = result;
         }
 
 
         @Override
-        public String get(int i) {
+        public Object get(int i) {
             return result.get(i);
         }
 

@@ -37,4 +37,8 @@ public class Parsing {
         repetition.is(choice(empty, concat(repetition, parser)));
         return repetition;
     }
+
+    public static Parser transform(Parser parser, Transformation transformation) {
+        return new TransformingParser(parser, transformation);
+    }
 }
