@@ -12,8 +12,8 @@ public class TransformingParser extends Parser {
     }
 
     @Override
-    protected void parse(RemainingInput input, final ResultHandler handler) {
-        parser.parse(input, new ResultHandler() {
+    protected void parse(RemainingInput input, Trampoline trampoline, final ResultHandler handler) {
+        parser.parse(input, trampoline, new ResultHandler() {
             @Override
             public void handle(Result intermediate, RemainingInput remainder) {
                 Result result = result(transformation.transform(intermediate));

@@ -13,11 +13,11 @@ public class ConcatenationParser extends Parser {
     }
 
     @Override
-    protected void parse(RemainingInput input, final ResultHandler handler) {
-        left.parse(input, new ResultHandler() {
+    protected void parse(RemainingInput input, final Trampoline trampoline, final ResultHandler handler) {
+        left.parse(input, trampoline, new ResultHandler() {
             @Override
             public void handle(final Result leftResult, RemainingInput leftRemainder) {
-                right.parse(leftRemainder, new ResultHandler() {
+                right.parse(leftRemainder, trampoline, new ResultHandler() {
                     @Override
                     public void handle(Result rightResult, RemainingInput rightRemainder) {
                         handler.handle(combine(leftResult, rightResult), rightRemainder);

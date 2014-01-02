@@ -13,7 +13,7 @@ public class Range extends Parser {
     }
 
     @Override
-    protected void parse(RemainingInput input, ResultHandler handler) {
+    protected void parse(RemainingInput input, Trampoline trampoline, ResultHandler handler) {
         if (input.length() < 1) {
             return;
         }

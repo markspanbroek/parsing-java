@@ -22,16 +22,26 @@ public class Rule extends Parser {
     }
 
     @Override
-    protected void parse(final RemainingInput input, ResultHandler handler) {
+    protected void parse(final RemainingInput input, final Trampoline trampoline, ResultHandler handler) {
         chart.waitForResults(input, handler);
         if (!parsing.contains(input)) {
             parsing.add(input);
-            expression.parse(input, new ResultHandler() {
-                @Override
-                public void handle(Result result, RemainingInput remainder) {
-                    chart.provideResult(input, result, remainder);
-                }
-            });
+            parseUsingTrampoline(input, trampoline);
         }
     }
+
+    private void parseUsingTrampoline(final RemainingInput input, final Trampoline trampoline) {
+        trampoline.schedule(new Runnable() {
+            @Override
+            public void run() {
+                expression.parse(input, trampoline, new ResultHandler() {
+                    @Override
+                    public void handle(Result result, RemainingInput remainder) {
+                        chart.provideResult(input, result, remainder);
+                    }
+                });
+            }
+        });
+    }
+
 }

@@ -11,7 +11,7 @@ class LiteralParser extends Parser {
     }
 
     @Override
-    protected void parse(RemainingInput input, ResultHandler handler) {
+    protected void parse(RemainingInput input, Trampoline trampoline, ResultHandler handler) {
         if (input.startsWith(literal)) {
             handler.handle(result(literal), input.shift(literal.length()));
         }

@@ -35,4 +35,13 @@ public class CalculatorTests {
         assertEquals(0, calculator.evaluate("2-(1+1)"));
     }
 
+    @Test
+    public void shouldHandleLargeExpressions() {
+        String expression = "1";
+        for (int i=0; i<10000; i++) {
+            expression = expression + "+0";
+        }
+
+        assertEquals(1, calculator.evaluate(expression));
+    }
 }
