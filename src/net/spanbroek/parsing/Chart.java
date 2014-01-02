@@ -9,7 +9,7 @@ public class Chart {
     private ResultHandlers waiting = new ResultHandlers();
     private PartialResults results = new PartialResults();
 
-    public void waitForResults(String input, ResultHandler handler) {
+    public void waitForResults(RemainingInput input, ResultHandler handler) {
         waiting.add(input, handler);
         List<PartialResult> partials = results.get(input);
         for (int i=0; i<partials.size(); i++) {
@@ -18,7 +18,7 @@ public class Chart {
         }
     }
 
-    public void provideResult(String input, Result result, String remainder) {
+    public void provideResult(RemainingInput input, Result result, RemainingInput remainder) {
         if (results.contains(input, result, remainder)) {
             return;
         }
@@ -29,23 +29,23 @@ public class Chart {
         }
     }
 
-    private class ResultHandlers extends MultiMap<String, ResultHandler> {}
+    private class ResultHandlers extends MultiMap<RemainingInput, ResultHandler> {}
 
-    private class PartialResults extends MultiMap<String, PartialResult> {
-        public void add(String input, Result result, String remainder) {
+    private class PartialResults extends MultiMap<RemainingInput, PartialResult> {
+        public void add(RemainingInput input, Result result, RemainingInput remainder) {
             add(input, new PartialResult(result, remainder));
         }
 
-        public boolean contains(String input, Result result, String remainder) {
+        public boolean contains(RemainingInput input, Result result, RemainingInput remainder) {
             return get(input).contains(new PartialResult(result, remainder));
         }
     }
 
     private class PartialResult {
         public Result result;
-        public String remainder;
+        public RemainingInput remainder;
 
-        public PartialResult(Result result, String remainder) {
+        public PartialResult(Result result, RemainingInput remainder) {
             this.result = result;
             this.remainder = remainder;
         }

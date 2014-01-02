@@ -11,7 +11,7 @@ public class AlternativesParser extends Parser {
     }
 
     @Override
-    protected void parse(String input, ResultHandler handler) {
+    protected void parse(RemainingInput input, ResultHandler handler) {
         left.parse(input, handler);
         right.parse(input, handler);
     }

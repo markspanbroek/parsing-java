@@ -4,11 +4,11 @@ public abstract class Parser {
 
     public Object parse(String input) {
         Handler handler = new Handler();
-        parse(input, handler);
+        parse(new RemainingInput(input), handler);
         return simplify(handler.lastResult);
     }
 
-    protected abstract void parse(String input, ResultHandler handler);
+    protected abstract void parse(RemainingInput input, ResultHandler handler);
 
     private Object simplify(Result result) {
         if (result != null && result.size() == 1) {
@@ -23,7 +23,7 @@ public abstract class Parser {
         public Result lastResult;
 
         @Override
-        public void handle(Result result, String remainder) {
+        public void handle(Result result, RemainingInput remainder) {
             lastResult = result;
         }
     }

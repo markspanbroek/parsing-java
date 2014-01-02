@@ -13,16 +13,15 @@ public class Range extends Parser {
     }
 
     @Override
-    protected void parse(String input, ResultHandler handler) {
+    protected void parse(RemainingInput input, ResultHandler handler) {
         if (input.length() < 1) {
             return;
         }
 
-        char character = input.charAt(0);
+        char character = input.firstCharacter();
         if (begin <= character && character <= end) {
             Result result = result("" + character);
-            String remainder = input.substring(1);
-            handler.handle(result, remainder);
+            handler.handle(result, input.shift(1));
         }
     }
 }

@@ -12,10 +12,10 @@ public class TransformingParser extends Parser {
     }
 
     @Override
-    protected void parse(String input, final ResultHandler handler) {
+    protected void parse(RemainingInput input, final ResultHandler handler) {
         parser.parse(input, new ResultHandler() {
             @Override
-            public void handle(Result intermediate, String remainder) {
+            public void handle(Result intermediate, RemainingInput remainder) {
                 Result result = result(transformation.transform(intermediate));
                 handler.handle(result, remainder);
             }
