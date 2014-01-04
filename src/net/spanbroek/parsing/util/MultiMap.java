@@ -2,13 +2,13 @@ package net.spanbroek.parsing.util;
 
 import java.util.*;
 
-public class MultiMap<K,V> extends HashMap<K,List<V>> {
+public class MultiMap<K,V> extends HashMap<K,Set<V>> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<V> get(Object key) {
+    public Set<V> get(Object key) {
         if (!containsKey(key)) {
-            put((K)key, new ArrayList<V>());
+            put((K)key, new LinkedHashSet<V>());
         }
         return super.get(key);
     }
