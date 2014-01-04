@@ -56,9 +56,15 @@ public class Chart {
 
         @Override
         public boolean equals(Object that) {
-            return that instanceof PartialResult &&
-                    ((PartialResult) that).result.equals(result) &&
-                    ((PartialResult) that).remainder.equals(remainder);
+            return this == that ||
+                    that instanceof PartialResult &&
+                    remainder.equals(((PartialResult) that).remainder) &&
+                    result.equals(((PartialResult) that).result);
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * result.hashCode() + remainder.hashCode();
         }
     }
 }

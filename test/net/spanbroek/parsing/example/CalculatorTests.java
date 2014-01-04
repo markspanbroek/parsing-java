@@ -44,4 +44,13 @@ public class CalculatorTests {
 
         assertEquals(1, calculator.evaluate(expression));
     }
+
+    @Test
+    public void shouldHandleSuccessiveLargeExpressions() {
+        String expression = "1";
+        for (int i=0; i<1000; i++) {
+            expression = expression + "+0";
+            assertEquals(1, calculator.evaluate(expression));
+        }
+    }
 }
