@@ -34,12 +34,11 @@ public class RemainingInput {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RemainingInput that = (RemainingInput) o;
-        return offset == that.offset && input.equals(that.input);
+    public boolean equals(Object that) {
+        return this == that ||
+                that instanceof RemainingInput &&
+                offset == ((RemainingInput) that).offset &&
+                input.equals(((RemainingInput) that).input);
     }
 
     @Override
