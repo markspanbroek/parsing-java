@@ -4,7 +4,7 @@ import static net.spanbroek.parsing.util.Results.result;
 
 public class EmptyParser extends Parser {
     @Override
-    protected void parse(RemainingInput input, Trampoline trampoline, ResultHandler handler) {
+    protected void parse(RemainingInput input, ResultHandler handler, Session session) {
         handler.handle(result(), input);
     }
 }

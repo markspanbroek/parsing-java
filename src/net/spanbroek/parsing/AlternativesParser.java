@@ -11,8 +11,8 @@ public class AlternativesParser extends Parser {
     }
 
     @Override
-    protected void parse(RemainingInput input, Trampoline trampoline, ResultHandler handler) {
-        left.parse(input, trampoline, handler);
-        right.parse(input, trampoline, handler);
+    protected void parse(RemainingInput input, ResultHandler handler, Session session) {
+        left.parse(input, handler, session);
+        right.parse(input, handler, session);
     }
 }
