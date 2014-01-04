@@ -3,6 +3,8 @@ package net.spanbroek.parsing;
 import org.junit.Test;
 
 import static net.spanbroek.parsing.util.Results.result;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class ChartTests {
@@ -69,5 +71,12 @@ public class ChartTests {
         chart.provideResult(input, result, remainder);
 
         verify(handler, times(1)).handle(result, remainder);
+    }
+
+    @Test
+    public void shouldKnowWhenWaitingForResults() {
+        assertFalse(chart.isWaitingForResults(input));
+        chart.waitForResults(input, handler);
+        assertTrue(chart.isWaitingForResults(input));
     }
 }

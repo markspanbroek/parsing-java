@@ -18,6 +18,10 @@ public class Chart {
         }
     }
 
+    public boolean isWaitingForResults(RemainingInput input) {
+        return waiting.containsKey(input);
+    }
+
     public void provideResult(RemainingInput input, Result result, RemainingInput remainder) {
         if (results.contains(input, result, remainder)) {
             return;

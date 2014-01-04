@@ -1,12 +1,8 @@
 package net.spanbroek.parsing;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class Rule extends Parser {
 
     private Parser expression;
-    private Set<RemainingInput> parsing = new HashSet<RemainingInput>();
 
     public Rule(Parser expression) {
         this.expression = expression;
@@ -21,13 +17,12 @@ public class Rule extends Parser {
     }
 
     @Override
-    protected void parse(final RemainingInput input, ResultHandler handler, Session session) {
+    protected void parse(RemainingInput input, ResultHandler handler, Session session) {
         Chart chart = session.getChartForRule(this);
-        chart.waitForResults(input, handler);
-        if (!parsing.contains(input)) {
-            parsing.add(input);
+        if (!chart.isWaitingForResults(input)) {
             parseUsingTrampoline(input, session);
         }
+        chart.waitForResults(input, handler);
     }
 
     private void parseUsingTrampoline(final RemainingInput input, final Session session) {
@@ -44,5 +39,4 @@ public class Rule extends Parser {
             }
         });
     }
-
 }
