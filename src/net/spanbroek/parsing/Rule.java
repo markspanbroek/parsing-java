@@ -6,7 +6,6 @@ import java.util.Set;
 public class Rule extends Parser {
 
     private Parser expression;
-    private Chart chart = new Chart();
     private Set<RemainingInput> parsing = new HashSet<RemainingInput>();
 
     public Rule(Parser expression) {
@@ -23,6 +22,7 @@ public class Rule extends Parser {
 
     @Override
     protected void parse(final RemainingInput input, ResultHandler handler, Session session) {
+        Chart chart = session.getChartForRule(this);
         chart.waitForResults(input, handler);
         if (!parsing.contains(input)) {
             parsing.add(input);
@@ -37,6 +37,7 @@ public class Rule extends Parser {
                 expression.parse(input, new ResultHandler() {
                     @Override
                     public void handle(Result result, RemainingInput remainder) {
+                        Chart chart = session.getChartForRule(Rule.this);
                         chart.provideResult(input, result, remainder);
                     }
                 }, session);

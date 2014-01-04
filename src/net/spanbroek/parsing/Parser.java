@@ -3,10 +3,10 @@ package net.spanbroek.parsing;
 public abstract class Parser {
 
     public Object parse(String input) {
-        Trampoline trampoline = new Trampoline();
+        Session session = new Session();
         Handler handler = new Handler();
-        parse(new RemainingInput(input), handler, new Session(trampoline));
-        trampoline.run();
+        parse(new RemainingInput(input), handler, session);
+        session.getTrampoline().run();
         return simplify(handler.lastResult);
     }
 
