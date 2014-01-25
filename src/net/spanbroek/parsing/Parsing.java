@@ -24,6 +24,8 @@ public class Parsing {
 
     public static Parser empty = new EmptyParser();
 
+    public static Parser never = new NeverParser();
+
     public static Rule rule() {
         return rule(empty);
     }
