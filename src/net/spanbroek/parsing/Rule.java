@@ -13,7 +13,7 @@ public class Rule extends Parser {
     }
 
     public void transform(Transformation transformation) {
-        expression = Parsing.transform(expression, transformation);
+        expression = new TransformingParser(expression, transformation);
     }
 
     @Override
