@@ -27,4 +27,16 @@ public class ConcatenationTests {
         parser = concat(literal("a"), literal("b"), literal("c"));
         assertEquals(result("a","b","c"), parser.parse("abc"));
     }
+
+    @Test
+    public void shouldHandleConcatenationOfOne() {
+        parser = concat(literal("foo"));
+        assertEquals("foo", parser.parse("foo"));
+    }
+
+    @Test
+    public void shouldHandleEmptyConcatenation() {
+        parser = concat();
+        assertEquals(result(), parser.parse(""));
+    }
 }

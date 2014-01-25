@@ -22,4 +22,17 @@ public class AlternativesTests {
     public void shouldFailToParseAlternatives() {
         assertNull(parser.parse("qux"));
     }
+
+    @Test
+    public void shouldHandleChoiceOfOne() {
+        parser = choice(literal("foo"));
+        assertEquals("foo", parser.parse("foo"));
+    }
+
+    @Test
+    public void shouldHandleEmptyChoice() {
+        parser = choice();
+        assertNull(parser.parse(""));
+    }
+
 }

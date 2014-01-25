@@ -6,18 +6,26 @@ public class Parsing {
         return new LiteralParser(literal);
     }
 
-    public static Parser concat(Parser parser1, Parser parser2, Parser... rest) {
-        Parser result = new ConcatenationParser(parser1, parser2);
-        for (Parser parser : rest) {
-            result = new ConcatenationParser(result, parser);
+    public static Parser concat(Parser... parsers) {
+        if (parsers.length == 0) {
+            return empty;
+        }
+
+        Parser result = parsers[0];
+        for (int i=1; i<parsers.length; i++) {
+            result = new ConcatenationParser(result, parsers[i]);
         }
         return result;
     }
 
-    public static Parser choice(Parser parser1, Parser parser2, Parser... rest) {
-        Parser result = new AlternativesParser(parser1, parser2);
-        for (Parser parser : rest) {
-            result = new AlternativesParser(result, parser);
+    public static Parser choice(Parser... parsers) {
+        if (parsers.length == 0) {
+            return never;
+        }
+
+        Parser result = parsers[0];
+        for (int i=1; i<parsers.length; i++) {
+            result = new AlternativesParser(result, parsers[i]);
         }
         return result;
     }
