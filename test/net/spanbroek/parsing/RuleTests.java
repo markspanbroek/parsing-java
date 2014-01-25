@@ -12,14 +12,14 @@ public class RuleTests {
 
     @Test
     public void shouldBeAbbreviationForExpression() {
-        Rule parser = rule(concat(literal("a"), literal("b")));
+        Rule parser = rule("a", "b");
         assertEquals(result("a","b"), parser.parse("ab"));
     }
 
     @Test
     public void shouldHandleLeftRecursion() {
         Rule parser = rule();
-        parser.is( choice(empty, concat(parser, literal("a"))) );
+        parser.is( choice(empty, concat(parser, "a")) );
 
         assertEquals(result("a", "a", "a"), parser.parse("aaa"));
     }
@@ -27,7 +27,7 @@ public class RuleTests {
     @Test
     public void shouldHandleRightRecursion() {
         Rule parser = rule();
-        parser.is( choice(empty, concat(literal("a"), parser)) );
+        parser.is( choice(empty, concat("a", parser)) );
 
         assertEquals(result("a", "a", "a"), parser.parse("aaa"));
     }
@@ -35,7 +35,7 @@ public class RuleTests {
     @Test
     public void shouldHandleRecursionWithoutProgress() {
         Rule parser = rule();
-        parser.is( choice(parser, literal("a")) );
+        parser.is( choice(parser, "a") );
 
         assertEquals("a", parser.parse("a"));
     }
@@ -55,10 +55,10 @@ public class RuleTests {
 
     @Test
     public void shouldConcatenateItsArguments() {
-        Rule parser = rule(literal("a"), literal("b"));
+        Rule parser = rule("a", "b");
         assertEquals(result("a", "b"), parser.parse("ab"));
 
-        parser.is(literal("a"), literal("b"));
+        parser.is("a", "b");
         assertEquals(result("a", "b"), parser.parse("ab"));
     }
 }

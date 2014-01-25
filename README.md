@@ -16,7 +16,7 @@ parse and evaluate simple expressions like "2+(1-1)":
         // Set right hand side of grammar rules:
         ...
         addition.is(
-                concat(expression, literal("+"), expression1)
+                expression, "+", expression1
         );
         ...
 

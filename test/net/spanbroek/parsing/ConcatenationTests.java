@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNull;
 
 public class ConcatenationTests {
 
-    private Parser parser = concat(literal("foo"), literal("bar"));
+    private Parser parser = concat("foo", "bar");
 
     @Test
     public void shouldSuccessfullyParseAConcatenation() {
@@ -24,13 +24,13 @@ public class ConcatenationTests {
 
     @Test
     public void shouldReturnListOfResults() {
-        parser = concat(literal("a"), literal("b"), literal("c"));
+        parser = concat("a", "b", "c");
         assertEquals(result("a","b","c"), parser.parse("abc"));
     }
 
     @Test
     public void shouldHandleConcatenationOfOne() {
-        parser = concat(literal("foo"));
+        parser = concat("foo");
         assertEquals("foo", parser.parse("foo"));
     }
 

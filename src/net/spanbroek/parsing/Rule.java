@@ -10,7 +10,7 @@ public class Rule extends Parser {
         this.expression = expression;
     }
 
-    public void is(Parser... concatenation) {
+    public void is(Object... concatenation) {
         this.expression = concat(concatenation);
     }
 

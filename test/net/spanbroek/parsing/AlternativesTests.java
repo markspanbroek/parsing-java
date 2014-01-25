@@ -3,13 +3,12 @@ package net.spanbroek.parsing;
 import org.junit.Test;
 
 import static net.spanbroek.parsing.Parsing.choice;
-import static net.spanbroek.parsing.Parsing.literal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 public class AlternativesTests {
 
-    private Parser parser = choice(literal("foo"), literal("bar"), literal("baz"));
+    private Parser parser = choice("foo", "bar", "baz");
 
     @Test
     public void shouldParseAlternatives() {
@@ -25,7 +24,7 @@ public class AlternativesTests {
 
     @Test
     public void shouldHandleChoiceOfOne() {
-        parser = choice(literal("foo"));
+        parser = choice("foo");
         assertEquals("foo", parser.parse("foo"));
     }
 
