@@ -45,4 +45,8 @@ public class Parsing {
     public static Parser range(char begin, char end) {
         return new Range(begin, end);
     }
+
+    public static Parser optional(Parser parser) {
+        return choice(empty, parser);
+    }
 }
