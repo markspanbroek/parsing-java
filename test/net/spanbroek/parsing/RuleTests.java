@@ -52,4 +52,13 @@ public class RuleTests {
 
         assertEquals("foo", parser.parse(""));
     }
+
+    @Test
+    public void shouldConcatenateItsArguments() {
+        Rule parser = rule(literal("a"), literal("b"));
+        assertEquals(result("a", "b"), parser.parse("ab"));
+
+        parser.is(literal("a"), literal("b"));
+        assertEquals(result("a", "b"), parser.parse("ab"));
+    }
 }

@@ -38,13 +38,13 @@ public class Parsing {
         return rule(empty);
     }
 
-    public static Rule rule(Parser expression) {
-        return new Rule(expression);
+    public static Rule rule(Parser... concatenation) {
+        return new Rule(concat(concatenation));
     }
 
-    public static Parser repeat(Parser parser) {
+    public static Parser repeat(Parser... concatenation) {
         Rule repetition = rule();
-        repetition.is(choice(empty, concat(repetition, parser)));
+        repetition.is(choice(empty, concat(repetition, concat(concatenation))));
         return repetition;
     }
 
@@ -52,7 +52,7 @@ public class Parsing {
         return new Range(begin, end);
     }
 
-    public static Parser optional(Parser parser) {
-        return choice(empty, parser);
+    public static Parser optional(Parser... concatenation) {
+        return choice(empty, concat(concatenation));
     }
 }

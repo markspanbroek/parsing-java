@@ -1,5 +1,7 @@
 package net.spanbroek.parsing;
 
+import static net.spanbroek.parsing.Parsing.concat;
+
 public class Rule extends Parser {
 
     private Parser expression;
@@ -8,8 +10,8 @@ public class Rule extends Parser {
         this.expression = expression;
     }
 
-    public void is(Parser expression) {
-        this.expression = expression;
+    public void is(Parser... concatenation) {
+        this.expression = concat(concatenation);
     }
 
     public void transform(Transformation transformation) {

@@ -20,4 +20,11 @@ public class OptionalTests {
     public void shouldParseEmpty() {
         assertEquals(result(), parser.parse(""));
     }
+
+    @Test
+    public void shouldConcatenateItsArguments() {
+        Parser parser = optional(literal("a"), literal("b"));
+        assertEquals(result("a", "b"), parser.parse("ab"));
+    }
+
 }

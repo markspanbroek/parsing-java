@@ -25,13 +25,13 @@ public class Calculator {
                 choice(braces, integer)
         );
         addition.is(
-                concat(expression, literal("+"), expression1)
+                expression, literal("+"), expression1
         );
         subtraction.is(
-                concat(expression, literal("-"), expression1)
+                expression, literal("-"), expression1
         );
         braces.is(
-                concat(literal("("), expression, literal(")"))
+                literal("("), expression, literal(")")
         );
         integer.is(
                 range('0','9')
