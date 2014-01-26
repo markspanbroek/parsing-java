@@ -59,4 +59,8 @@ public class Parsing {
     public static Parser optional(Object... concatenation) {
         return choice(empty, concat(concatenation));
     }
+
+    public static Parser no(Character... characters) {
+        return new NegativeParser(characters);
+    }
 }
