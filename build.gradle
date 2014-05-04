@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src'
+        }
+    }
+    test {
+        java {
+            srcDirs 'test'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.+'
+    testCompile fileTree(dir: 'lib', includes: ['*.jar'])
+}
