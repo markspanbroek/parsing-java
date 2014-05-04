@@ -1,7 +1,7 @@
 Parsing
 =======
 
-[![Build Status](https://travis-ci.org/markspanbroek/parsing-java.svg?branch=master)](https://travis-ci.org/markspanbroek/parsing-java)
+[![Build Status](https://travis-ci.org/markspanbroek/parsing-java.svg?branch=java8)](https://travis-ci.org/markspanbroek/parsing-java)
 
 This is a Java library for parsing context free grammars. It is inspired by a
 paper by Mark Johnson: [Memoization of Top-down Parsing][1].
