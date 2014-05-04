@@ -2,7 +2,7 @@ Parsing
 =======
 
 This is a Java library for parsing context free grammars. It is inspired by a
-paper by Mark Johnson: [Memoization in top-down parsing][1].
+paper by Mark Johnson: [Memoization of Top-down Parsing][1].
 
 A calculator has been included as an example of how to use the library. It can
 parse and evaluate simple expressions like "2+(1-1)":
