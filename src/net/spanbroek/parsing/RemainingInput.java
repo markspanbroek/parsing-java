@@ -4,14 +4,16 @@ public class RemainingInput {
 
     private String input;
     private int offset;
+    private Position position;
 
     public RemainingInput(String input) {
-        this(input, 0);
+        this(input, 0, new Position(1,1));
     }
 
-    public RemainingInput(String input, int offset) {
+    private RemainingInput(String input, int offset, Position position) {
         this.input = input;
         this.offset = offset;
+        this.position = position;
     }
 
     public boolean startsWith(String prefix) {
@@ -22,7 +24,22 @@ public class RemainingInput {
     }
 
     public RemainingInput shift(int amountOfCharacters) {
-        return new RemainingInput(input, offset + amountOfCharacters);
+        Position newPosition = shiftPosition(amountOfCharacters);
+        return new RemainingInput(input, offset + amountOfCharacters, newPosition);
+    }
+
+    private Position shiftPosition(int amountOfCharacters) {
+        int lineNumber = position.getLineNumber();
+        int columnNumber = position.getColumnNumber();
+        for (int i=0; i< amountOfCharacters; i++) {
+            if (input.charAt(i) == '\n') {
+                lineNumber++;
+                columnNumber = 1;
+            } else {
+                columnNumber++;
+            }
+        }
+        return new Position(lineNumber, columnNumber);
     }
 
     public int length() {
@@ -31,6 +48,10 @@ public class RemainingInput {
 
     public char firstCharacter() {
         return input.charAt(offset);
+    }
+
+    public Position getPosition() {
+        return position;
     }
 
     @Override

@@ -42,4 +42,12 @@ public class RemainingInputTests {
         assertEquals('f', new RemainingInput("foo").firstCharacter());
         assertEquals('a', new RemainingInput("bar").shift(1).firstCharacter());
     }
+
+    @Test
+    public void knowsItsPosition() {
+        RemainingInput input = new RemainingInput("foo\nbar");
+        assertEquals(new Position(1, 1), input.getPosition());
+        assertEquals(new Position(1, 2), input.shift(1).getPosition());
+        assertEquals(new Position(2, 1), input.shift(4).getPosition());
+    }
 }
