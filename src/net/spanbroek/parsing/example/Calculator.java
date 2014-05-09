@@ -1,6 +1,7 @@
 package net.spanbroek.parsing.example;
 
 import net.spanbroek.parsing.Parser;
+import net.spanbroek.parsing.Position;
 import net.spanbroek.parsing.Rule;
 import net.spanbroek.parsing.Transformation;
 
@@ -39,13 +40,13 @@ public class Calculator {
 
         integer.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result) {
+            public Object transform(List<Object> result, Position position) {
                 return Integer.parseInt((String) result.get(0));
             }
         });
         addition.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result) {
+            public Object transform(List<Object> result, Position position) {
                 int left = (Integer)result.get(0);
                 int right = (Integer)result.get(2);
                 return left + right;
@@ -53,7 +54,7 @@ public class Calculator {
         });
         subtraction.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result) {
+            public Object transform(List<Object> result, Position position) {
                 int left = (Integer)result.get(0);
                 int right = (Integer)result.get(2);
                 return left - right;
@@ -61,7 +62,7 @@ public class Calculator {
         });
         braces.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result) {
+            public Object transform(List<Object> result, Position position) {
                 return result.get(1);
             }
         });

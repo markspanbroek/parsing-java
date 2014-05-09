@@ -7,6 +7,10 @@ import java.util.List;
 import static net.spanbroek.parsing.Parsing.*;
 import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyListOf;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class RuleTests {
 
@@ -45,12 +49,23 @@ public class RuleTests {
         Rule parser = rule();
         parser.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result) {
+            public Object transform(List<Object> result, Position position) {
                 return "foo";
             }
         });
 
         assertEquals("foo", parser.parse(""));
+    }
+
+    @Test
+    public void shouldPassPositionToTransformation() {
+        Transformation transformation = mock(Transformation.class);
+        Rule parser = rule("foo");
+        parser.transform(transformation);
+
+        parser.parse("foo");
+
+        verify(transformation).transform(anyListOf(Object.class), eq(new Position(1,1)));
     }
 
     @Test
