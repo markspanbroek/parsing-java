@@ -6,8 +6,8 @@ public class Rule extends Parser {
 
     private Parser expression;
 
-    public Rule(Parser expression) {
-        this.expression = expression;
+    public Rule(Object... concatenation) {
+        this.is(concatenation);
     }
 
     public void is(Object... concatenation) {

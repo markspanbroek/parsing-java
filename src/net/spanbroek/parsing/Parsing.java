@@ -43,7 +43,7 @@ public class Parsing {
     }
 
     public static Rule rule(Object... concatenation) {
-        return new Rule(concat(concatenation));
+        return new Rule(concatenation);
     }
 
     public static Parser repeat(Object... concatenation) {
