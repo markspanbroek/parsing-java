@@ -2,8 +2,6 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 
-import java.util.List;
-
 import static net.spanbroek.parsing.Parsing.*;
 import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
@@ -43,12 +41,7 @@ public class RuleTests {
     @Test
     public void shouldEnableTransformations() {
         Rule parser = rule();
-        parser.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                return "foo";
-            }
-        });
+        parser.transform((result, context) -> "foo");
 
         assertEquals("foo", parser.parse(""));
     }
@@ -56,12 +49,9 @@ public class RuleTests {
     @Test
     public void shouldPassPositionToTransformation() {
         Rule parser = rule("foo", "bar");
-        parser.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                assertEquals(new Position(1, 1), context.getPosition());
-                return null;
-            }
+        parser.transform((result, context) -> {
+            assertEquals(new Position(1, 1), context.getPosition());
+            return null;
         });
 
         parser.parse("foobar");
@@ -70,12 +60,9 @@ public class RuleTests {
     @Test
     public void shouldPassOriginalTextToTransformation() {
         Rule parser = rule("foo", "bar");
-        parser.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                assertEquals("foobar", context.getOriginalText());
-                return null;
-            }
+        parser.transform((result, context) -> {
+            assertEquals("foobar", context.getOriginalText());
+            return null;
         });
 
         parser.parse("foobar");

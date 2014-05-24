@@ -2,7 +2,9 @@ package net.spanbroek.parsing.util;
 
 import net.spanbroek.parsing.Result;
 
-import java.util.*;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Results {
 
@@ -11,7 +13,7 @@ public class Results {
     }
 
     public static Result combine(Result... results) {
-        ArrayList<Object> combination = new ArrayList<Object>();
+        ArrayList<Object> combination = new ArrayList<>();
         for(Result result : results) {
             combination.addAll(result);
         }

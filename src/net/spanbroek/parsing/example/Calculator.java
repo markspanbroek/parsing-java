@@ -2,8 +2,6 @@ package net.spanbroek.parsing.example;
 
 import net.spanbroek.parsing.*;
 
-import java.util.List;
-
 import static net.spanbroek.parsing.Parsing.*;
 
 public class Calculator {
@@ -32,37 +30,25 @@ public class Calculator {
                 "(", expression, ")"
         );
         integer.is(
-                range('0','9')
+                range('0', '9')
         );
 
-        integer.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                return Integer.parseInt((String) result.get(0));
-            }
+        integer.transform((result, context) ->
+                        Integer.parseInt((String) result.get(0))
+        );
+        addition.transform((result, context) -> {
+            int left = (Integer) result.get(0);
+            int right = (Integer) result.get(2);
+            return left + right;
         });
-        addition.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                int left = (Integer)result.get(0);
-                int right = (Integer)result.get(2);
-                return left + right;
-            }
+        subtraction.transform((result, context) -> {
+            int left = (Integer) result.get(0);
+            int right = (Integer) result.get(2);
+            return left - right;
         });
-        subtraction.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                int left = (Integer)result.get(0);
-                int right = (Integer)result.get(2);
-                return left - right;
-            }
-        });
-        braces.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                return result.get(1);
-            }
-        });
+        braces.transform((result, context) ->
+                        result.get(1)
+        );
     }
 
     public int evaluate(String expression) {

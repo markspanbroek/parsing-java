@@ -13,14 +13,11 @@ public class TransformingParser extends Parser {
 
     @Override
     protected void parse(final RemainingInput input, final ResultHandler handler, Session session) {
-        parser.parse(input, new ResultHandler() {
-            @Override
-            public void handle(Result intermediate, RemainingInput remainder) {
+        parser.parse(input, (Result intermediate, RemainingInput remainder) -> {
                 String text = remainder.difference(input);
                 Position position = input.getPosition();
                 Result result = result(transformation.transform(intermediate, new Context(text, position)));
-                handler.handle(result, remainder);
-            }
+            handler.handle(result, remainder);
         }, session);
     }
 }

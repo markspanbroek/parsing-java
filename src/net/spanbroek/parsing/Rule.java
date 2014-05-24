@@ -28,17 +28,9 @@ public class Rule extends Parser {
     }
 
     private void parseUsingTrampoline(final RemainingInput input, final Session session) {
-        session.getTrampoline().schedule(new Runnable() {
-            @Override
-            public void run() {
-                expression.parse(input, new ResultHandler() {
-                    @Override
-                    public void handle(Result result, RemainingInput remainder) {
-                        Chart chart = session.getChartForRule(Rule.this);
-                        chart.provideResult(input, result, remainder);
-                    }
-                }, session);
-            }
-        });
+        session.getTrampoline().schedule(() -> expression.parse(input, (result, remainder) -> {
+            Chart chart = session.getChartForRule(Rule.this);
+            chart.provideResult(input, result, remainder);
+        }, session));
     }
 }

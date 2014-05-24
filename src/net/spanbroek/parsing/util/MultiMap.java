@@ -1,6 +1,8 @@
 package net.spanbroek.parsing.util;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MultiMap<K,V> extends HashMap<K,Set<V>> {
 
@@ -8,7 +10,7 @@ public class MultiMap<K,V> extends HashMap<K,Set<V>> {
     @SuppressWarnings("unchecked")
     public Set<V> get(Object key) {
         if (!containsKey(key)) {
-            put((K)key, new LinkedHashSet<V>());
+            put((K)key, new LinkedHashSet<>());
         }
         return super.get(key);
     }

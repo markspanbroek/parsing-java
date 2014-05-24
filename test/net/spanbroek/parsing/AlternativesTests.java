@@ -2,8 +2,6 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 
-import java.util.List;
-
 import static net.spanbroek.parsing.Parsing.choice;
 import static net.spanbroek.parsing.Parsing.rule;
 import static org.junit.Assert.assertEquals;
@@ -42,18 +40,8 @@ public class AlternativesTests {
     {
         Rule bar = rule("foo");
         Rule baz = rule("foo");
-        bar.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                return "bar";
-            }
-        });
-        baz.transform(new Transformation() {
-            @Override
-            public Object transform(List<Object> result, Context context) {
-                return "baz";
-            }
-        });
+        bar.transform((result, context) -> "bar");
+        baz.transform((result, context) -> "baz");
 
         parser = choice(bar, baz);
 
