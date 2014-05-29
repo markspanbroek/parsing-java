@@ -54,6 +54,12 @@ public class RemainingInput {
         return position;
     }
 
+    public String difference(RemainingInput that) {
+        int begin = Math.min(this.offset, that.offset);
+        int end = Math.max(this.offset, that.offset);
+        return input.substring(begin, end);
+    }
+
     @Override
     public boolean equals(Object that) {
         return this == that ||

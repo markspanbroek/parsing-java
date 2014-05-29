@@ -40,13 +40,13 @@ public class Calculator {
 
         integer.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, Position position) {
+            public Object transform(List<Object> result, String text, Position position) {
                 return Integer.parseInt((String) result.get(0));
             }
         });
         addition.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, Position position) {
+            public Object transform(List<Object> result, String text, Position position) {
                 int left = (Integer)result.get(0);
                 int right = (Integer)result.get(2);
                 return left + right;
@@ -54,7 +54,7 @@ public class Calculator {
         });
         subtraction.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, Position position) {
+            public Object transform(List<Object> result, String text, Position position) {
                 int left = (Integer)result.get(0);
                 int right = (Integer)result.get(2);
                 return left - right;
@@ -62,7 +62,7 @@ public class Calculator {
         });
         braces.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, Position position) {
+            public Object transform(List<Object> result, String text, Position position) {
                 return result.get(1);
             }
         });

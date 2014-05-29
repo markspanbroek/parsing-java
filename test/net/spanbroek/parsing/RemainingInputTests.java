@@ -2,9 +2,7 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class RemainingInputTests {
 
@@ -50,4 +48,13 @@ public class RemainingInputTests {
         assertEquals(new Position(1, 2), input.shift(1).getPosition());
         assertEquals(new Position(2, 1), input.shift(4).getPosition());
     }
+
+    @Test
+    public void knowsDifferenceWithShiftedInput() {
+        RemainingInput input = new RemainingInput("foobar");
+        assertEquals("foo", input.difference(input.shift(3)));
+        assertEquals("bar", input.shift(3).difference(input.shift(6)));
+        assertEquals("bar", input.shift(6).difference(input.shift(3)));
+    }
+
 }

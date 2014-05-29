@@ -16,7 +16,9 @@ public class TransformingParser extends Parser {
         parser.parse(input, new ResultHandler() {
             @Override
             public void handle(Result intermediate, RemainingInput remainder) {
-                Result result = result(transformation.transform(intermediate, input.getPosition()));
+                String text = remainder.difference(input);
+                Position position = input.getPosition();
+                Result result = result(transformation.transform(intermediate, text, position));
                 handler.handle(result, remainder);
             }
         }, session);
