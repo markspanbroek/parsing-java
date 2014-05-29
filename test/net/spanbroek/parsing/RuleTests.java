@@ -7,11 +7,6 @@ import java.util.List;
 import static net.spanbroek.parsing.Parsing.*;
 import static net.spanbroek.parsing.util.Results.result;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 public class RuleTests {
 
@@ -50,7 +45,7 @@ public class RuleTests {
         Rule parser = rule();
         parser.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, String text, Position position) {
+            public Object transform(List<Object> result, Context context) {
                 return "foo";
             }
         });
@@ -60,24 +55,30 @@ public class RuleTests {
 
     @Test
     public void shouldPassPositionToTransformation() {
-        Transformation transformation = mock(Transformation.class);
-        Rule parser = rule("foo");
-        parser.transform(transformation);
+        Rule parser = rule("foo", "bar");
+        parser.transform(new Transformation() {
+            @Override
+            public Object transform(List<Object> result, Context context) {
+                assertEquals(new Position(1, 1), context.getPosition());
+                return null;
+            }
+        });
 
-        parser.parse("foo");
-
-        verify(transformation).transform(anyListOf(Object.class), any(String.class), eq(new Position(1,1)));
+        parser.parse("foobar");
     }
 
     @Test
     public void shouldPassOriginalTextToTransformation() {
-        Transformation transformation = mock(Transformation.class);
         Rule parser = rule("foo", "bar");
-        parser.transform(transformation);
+        parser.transform(new Transformation() {
+            @Override
+            public Object transform(List<Object> result, Context context) {
+                assertEquals("foobar", context.getOriginalText());
+                return null;
+            }
+        });
 
         parser.parse("foobar");
-
-        verify(transformation).transform(anyListOf(Object.class), eq("foobar"), any(Position.class));
     }
 
     @Test

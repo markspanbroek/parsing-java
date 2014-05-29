@@ -26,7 +26,7 @@ parse and evaluate simple expressions like "2+(1-1)":
         ...
         addition.transform(new Transformation() {
             @Override
-            public Object transform(List<Object> result, String text, Position position) {
+            public Object transform(List<Object> result, Context context) {
                 int left = (Integer)result.get(0);
                 int right = (Integer)result.get(2);
                 return left + right;
