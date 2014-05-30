@@ -7,7 +7,7 @@ public abstract class Parser {
         Handler handler = new Handler();
         parse(new RemainingInput(input), handler, session);
         session.getTrampoline().run();
-        return simplify(handler.lastResult);
+        return simplify(handler.result);
     }
 
     protected abstract void parse(RemainingInput input, ResultHandler handler, Session session);
@@ -22,11 +22,13 @@ public abstract class Parser {
 
     private class Handler implements ResultHandler {
 
-        public Result lastResult;
+        public Result result = null;
 
         @Override
         public void handle(Result result, RemainingInput remainder) {
-            lastResult = result;
+            if (this.result == null && remainder.length() == 0) {
+                this.result = result;
+            }
         }
     }
 }

@@ -2,7 +2,10 @@ package net.spanbroek.parsing;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static net.spanbroek.parsing.Parsing.choice;
+import static net.spanbroek.parsing.Parsing.rule;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -32,6 +35,29 @@ public class AlternativesTests {
     public void shouldHandleEmptyChoice() {
         parser = choice();
         assertNull(parser.parse(""));
+    }
+
+    @Test
+    public void shouldPreferFirstMatchingAlternative()
+    {
+        Rule bar = rule("foo");
+        Rule baz = rule("foo");
+        bar.transform(new Transformation() {
+            @Override
+            public Object transform(List<Object> result, Context context) {
+                return "bar";
+            }
+        });
+        baz.transform(new Transformation() {
+            @Override
+            public Object transform(List<Object> result, Context context) {
+                return "baz";
+            }
+        });
+
+        parser = choice(bar, baz);
+
+        assertEquals("bar", parser.parse("foo"));
     }
 
 }
